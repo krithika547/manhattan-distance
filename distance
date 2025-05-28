@@ -1,0 +1,32 @@
+import java.util.*;
+public class PostOfficeLocation {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter number of homes (locations): ");
+        int n = scanner.nextInt();
+        int[] x = new int[n];
+        int[] y = new int[n];
+        System.out.println("Enter coordinates (x y) for each home:");
+        for (int i = 0; i < n; i++) {
+            System.out.print("Home " + (i + 1) + ": ");
+            x[i] = scanner.nextInt();
+            y[i] = scanner.nextInt();
+        }
+        int medianX = findMedian(x);
+        int medianY = findMedian(y);
+        int totalDistance = 0;
+        for (int i = 0; i < n; i++) {
+            totalDistance += Math.abs(x[i] - medianX) + Math.abs(y[i] - medianY);
+        }
+        System.out.println("\nOptimal Post Office Location: (" + medianX + ", " + medianY + ")");
+        System.out.println("Total Manhattan Distance: " + totalDistance);
+    }
+    private static int findMedian(int[] arr) {
+        Arrays.sort(arr);
+        int mid = arr.length / 2;
+        if (arr.length % 2 == 0)
+            return arr[mid - 1]; // return lower median for even length
+        else
+            return arr[mid];
+    }
+}
